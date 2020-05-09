@@ -1,0 +1,439 @@
+{
+	"info": {
+		"_postman_id": "f4793155-0a2d-4b3e-b058-08949e5c7c74",
+		"name": "ProyectSecondHand",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add_user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b1550a19-f6a4-4e7f-b18c-c2c290772a42",
+						"exec": [
+							"console.log(pm.response)",
+							"console.log(pm.response.code)",
+							"console.log(pm.response.status)",
+							"",
+							"// var respuesta = console.data.token;",
+							"",
+							"pm.test(\"Validar_status_201\", function() { ",
+							"    pm.response.to.have.status(201) ",
+							"});",
+							"",
+							"pm.test(\"Validar_tiene_cuerpo\", function() { ",
+							"    pm.response.to.be.withBody",
+							"});",
+							"",
+							"pm.test(\"Validar_json\", function() { ",
+							"    pm.response.to.be.json",
+							"});",
+							"",
+							"//pm.test(\"Validar_token\", function() {",
+							" //   pm.expect(respuesta.)",
+							"//})",
+							"",
+							"pm.test(\"Response time is less than 400ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic Y29zbWUuZnVsYW5pdG8wMDRAbWFpbGluYXRvci5jb206MTIzMTIz",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "es-419",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"account\": {\"email\": \"cosme.fulanito004@mailinator.com\" } } "
+				},
+				"url": {
+					"raw": "https://{{base_url}}/nga/api/v1.1/private/accounts?lang=es",
+					"protocol": "https",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"nga",
+						"api",
+						"v1.1",
+						"private",
+						"accounts"
+					],
+					"query": [
+						{
+							"key": "lang",
+							"value": "es"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post_ad",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "dfc21b75-8809-4349-a8d3-3218d26f1dfe",
+						"exec": [
+							"",
+							"let getTokenRequest = {",
+							"    method: 'POST',",
+							"    url: 'https://webapi.segundamano.mx/nga/api/v1.1/private/accounts',",
+							"    header: {",
+							"            Authorization: 'Basic cGFwaXRhc2xleXM5MUBnbWFpbC5jb206Y29udHJhMTIz'",
+							"    }",
+							"};",
+							"",
+							"pm.sendRequest(getTokenRequest, (err, response) => {",
+							"    var jsonResponse = response.json(),",
+							"        newAccessToken = jsonResponse.access_token;",
+							"    pm.environment.set('accessToken', newAccessToken);",
+							"    pm.variables.set('accessToken', newAccessToken);",
+							"    console.log({ err, response, newAccessToken })",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "f325ece1-31cb-4954-8a22-67e90664273a",
+						"exec": [
+							"console.log(pm.response)",
+							"console.log(pm.response.code)",
+							"console.log(pm.response.status)",
+							"",
+							"// var respuesta = console.data.token;",
+							"",
+							"pm.test(\"Validar_status_201\", function() { ",
+							"    pm.response.to.have.status(201) ",
+							"});",
+							"",
+							"pm.test(\"Validar_tiene_cuerpo\", function() { ",
+							"    pm.response.to.be.withBody",
+							"});",
+							"",
+							"pm.test(\"Validar_json\", function() { ",
+							"    pm.response.to.be.json",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 4000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(4000);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true,
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "tag:scmcoord.com,2013:api {{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*",
+						"type": "text"
+					},
+					{
+						"key": "x-nga-source",
+						"value": "PHOENIX_DESKTOP",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"ad\":{\"locations\":[{\"code\":\"5\",\"key\":\"region\",\"label\":\"Baja California Sur\",\"locations\":[{\"code\":\"51\",\"key\":\"municipality\",\"label\":\"Comondú\",\"locations\":[{\"code\":\"3748\",\"key\":\"area\",\"label\":\"4 de Marzo\"}]}]}],\"subject\":\"Paseo perros a domicilio\",\"body\":\"Para su comodidad, paseo perros en su domicilio\",\"category\":{\"code\":\"4022\"},\"images\":[],\"price\":{\"currency\":\"mxn\",\"price_value\":1},\"ad_details\":{},\"phone_hidden\":0,\"plate\":\"\",\"vin\":\"\",\"type\":{\"code\":\"s\",\"label\":\"\"},\"ad\":\"Paseo perros a domicilio\"},\"category_suggestion\":false,\"commit\":true}"
+				},
+				"url": {
+					"raw": "https://{{base_url}}/nga/api/v1.7/private/accounts/10620414/klfst?lang=es",
+					"protocol": "https",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"nga",
+						"api",
+						"v1.7",
+						"private",
+						"accounts",
+						"10620414",
+						"klfst"
+					],
+					"query": [
+						{
+							"key": "lang",
+							"value": "es"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit_ad",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d559247f-cd96-4ad2-bde1-fa70c11cb1d2",
+						"exec": [
+							"",
+							"let getTokenRequest = {",
+							"    method: 'POST',",
+							"    url: 'https://webapi.segundamano.mx/nga/api/v1.1/private/accounts',",
+							"    header: {",
+							"            Authorization: 'Basic cGFwaXRhc2xleXM5MUBnbWFpbC5jb206Y29udHJhMTIz'",
+							"    }",
+							"};",
+							"",
+							"pm.sendRequest(getTokenRequest, (err, response) => {",
+							"    var jsonResponse = response.json(),",
+							"        newAccessToken = jsonResponse.access_token;",
+							"    pm.environment.set('accessToken', newAccessToken);",
+							"    pm.variables.set('accessToken', newAccessToken);",
+							"    console.log({ err, response, newAccessToken })",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "0d7f54f6-ef58-411d-b3eb-47d9811d57c0",
+						"exec": [
+							"pm.test(\"Validar_status_201\", function() { ",
+							"    pm.response.to.have.status(201) ",
+							"});",
+							"",
+							"pm.test(\"Validar_tiene_cuerpo\", function() { ",
+							"    pm.response.to.be.withBody",
+							"});",
+							"",
+							"pm.test(\"Validar_json\", function() { ",
+							"    pm.response.to.be.json",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 4000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(4000);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true,
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "tag:scmcoord.com,2013:api {{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*",
+						"type": "text"
+					},
+					{
+						"key": "x-nga-source",
+						"value": "PHOENIX_DESKTOP",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"ad\":{\"locations\":[{\"code\":\"3\",\"key\":\"region\",\"label\":\"Aguascalientes\",\"locations\":[{\"code\":\"35\",\"key\":\"municipality\",\"label\":\"Aguascalientes\",\"locations\":[{\"code\":\"2499\",\"key\":\"area\",\"label\":\"Aguascalientes 2000 (Fracc.)\"}]}]}],\"subject\":\"Lavado de gatos a domicilio\",\"body\":\"Lavamos gatos a domicilio pregunte por nuestras promociones*\\n\\n*promociones no disponibles\",\"category\":{\"code\":\"4022\"},\"images\":[],\"price\":{\"currency\":\"MXN\",\"price_value\":99},\"ad_details\":{},\"phone_hidden\":1,\"payment_and_delivery\":1,\"ship_addr_id\":\"20eedb14-8efe-11ea-9178-db7fc2a72722\",\"type\":{\"code\":\"s\",\"label\":\"Vendo\"},\"adId\":\"66923616\"},\"category_suggestion\":false,\"commit\":true}"
+				},
+				"url": {
+					"raw": "https://{{base_url}}/nga/api/v1.7/private/accounts/10620414/klfst/66923616/actions?lang=es",
+					"protocol": "https",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"nga",
+						"api",
+						"v1.7",
+						"private",
+						"accounts",
+						"10620414",
+						"klfst",
+						"66923616",
+						"actions"
+					],
+					"query": [
+						{
+							"key": "lang",
+							"value": "es"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_ad",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "41df1e7e-c7eb-43ec-bede-febdb6558791",
+						"exec": [
+							"let getTokenRequest = {",
+							"    method: 'POST',",
+							"    url: 'https://webapi.segundamano.mx/nga/api/v1.1/private/accounts',",
+							"    header: {",
+							"            Authorization: 'Basic cGFwaXRhc2xleXM5MUBnbWFpbC5jb206Y29udHJhMTIz'",
+							"    }",
+							"};",
+							"",
+							"pm.sendRequest(getTokenRequest, (err, response) => {",
+							"    var jsonResponse = response.json(),",
+							"        newAccessToken = jsonResponse.access_token;",
+							"    pm.environment.set('accessToken', newAccessToken);",
+							"    pm.variables.set('accessToken', newAccessToken);",
+							"    console.log({ err, response, newAccessToken })",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "1a79742d-325e-4f32-ac27-f8cc93f3c4ac",
+						"exec": [
+							"pm.test(\"Validar_status_200\", function() { ",
+							"    pm.response.to.have.status(200) ",
+							"});",
+							"",
+							"pm.test(\"Validar_tiene_cuerpo\", function() { ",
+							"    pm.response.to.be.withBody",
+							"});",
+							"",
+							"pm.test(\"Validar_json\", function() { ",
+							"    pm.response.to.be.json",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response time is less than 600ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(600);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "tag:scmcoord.com,2013:api {{accessToken}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*",
+						"type": "text"
+					},
+					{
+						"key": "x-nga-source",
+						"value": "PHOENIX_DESKTOP",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"delete_reason\":{\"code\":\"5\"} }"
+				},
+				"url": {
+					"raw": "https://{{base_url}}/nga/api/v1/private/accounts/10620414/klfst/66926651",
+					"protocol": "https",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"nga",
+						"api",
+						"v1",
+						"private",
+						"accounts",
+						"10620414",
+						"klfst",
+						"66926651"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
