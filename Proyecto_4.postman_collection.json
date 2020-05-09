@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6be8a8a9-4d1a-42f2-a281-f3f8dc2ed49d",
+		"_postman_id": "cb0ebd13-7ae4-44d5-8876-062ed9f5e8b7",
 		"name": "Proyecto_4",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,12 +11,15 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "b6fa6df0-205b-49ba-844a-a252c466b0e4",
+						"id": "3a5c41f8-1362-4434-b3a0-3cd105ef324d",
 						"exec": [
 							"pm.test(\"Validar_Status\", function(){",
 							"    pm.response.to.have.status(400);",
 							"});",
 							"",
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
 							"pm.test(\"Body_matches_string\", function(){",
 							"    pm.expect(pm.response.text()).to.include(\"error\");",
 							"});",
@@ -63,7 +66,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "fea30ebc-dbbc-4912-bf94-662fa2c68a61",
+						"id": "76055bcb-6aa7-4e30-8a1b-83bec446e537",
 						"exec": [
 							"pm.test(\"validar_status\", function(){",
 							"    pm.response.to.have.status(200);",
@@ -120,7 +123,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "6483c254-1dc8-4706-8644-cc16df1721d6",
+						"id": "2d518a90-7ff0-4b8a-b981-136cb6877ca0",
 						"exec": [
 							"let user = \"agente\" + (Math.floor(Math.random() * 7685) + 3) + \"@ventas.com\";",
 							"let pass = (Math.floor(Math.random() * 57684) + 10000);",
@@ -141,7 +144,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "8c1cd624-89a2-497d-9207-b98f3cecb97f",
+						"id": "ee7dc4e5-e409-4054-9e53-21d238bb1c61",
 						"exec": [
 							"pm.test(\"Validat_status\", function(){",
 							"    pm.response.to.have.status(201);",
@@ -218,7 +221,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "fbf7a4e1-edd9-467a-9a0e-67ecc431e38c",
+						"id": "e59005db-9b7a-4bda-baa4-1fa76aeaf30e",
 						"exec": [
 							"//numero con guien bajo? whhhhaaa",
 							"",
@@ -230,7 +233,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "3b6d2a2c-13ee-4841-b105-1a0246745550",
+						"id": "6fd04057-67cc-4d40-879d-380d4c24aa4e",
 						"exec": [
 							"pm.test(\"validar_status\", function(){",
 							"    pm.response.to.have.status(200);",
@@ -285,7 +288,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "984d8f3b-a1e8-4178-b389-4cca323cc982",
+						"id": "7eef6a27-7971-4404-8308-b41462c986fa",
 						"exec": [
 							"pm.test(\"validar_status\", function(){",
 							"    pm.response.to.have.status(201);",
@@ -304,7 +307,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "19d9de60-65ea-427d-8b97-16348a046fb4",
+						"id": "3adc0fdb-7942-4f98-bb0e-b94efae7539f",
 						"exec": [
 							"texto = Math.random().toString(36).substring(2,15) + Math.random().toString(36).substring(2,15);",
 							"",
@@ -372,7 +375,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "bd7aafca-294a-4603-9d3a-e75981cd0f11",
+						"id": "4b357415-5058-47c6-824d-1a2330c451f6",
 						"exec": [
 							"texto = Math.random().toString(36).substring(2,15) + Math.random().toString(36).substring(2,15);",
 							"const ventas = \"\" + texto;",
@@ -385,7 +388,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "018f9b8c-ab36-4e48-b170-7119751040d0",
+						"id": "d3db29c3-1f9c-472f-a863-307c3b9b3f16",
 						"exec": [
 							"pm.test(\"validar_status\", function(){",
 							"    pm.response.to.have.status(201);",
@@ -453,7 +456,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "30987c24-98c3-4373-948e-3790f0a59337",
+						"id": "79443d8f-a7e6-4b65-8d82-93dad1250af5",
 						"exec": [
 							"var localToken = pm.environment.get('token');",
 							"var localUuid = pm.environment.get('uuid');",
@@ -471,7 +474,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "8f955f77-1b3c-460d-8683-9890cbe0cd49",
+						"id": "6e4172d4-81a5-4e24-9e14-698a416f9f55",
 						"exec": [
 							"pm.test(\"validar_status\", function(){",
 							"    pm.response.to.have.status(200);",
@@ -524,7 +527,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "aaa03dbc-4362-4c1c-bd51-ff69d0914140",
+						"id": "b8e99890-9882-4010-8cff-7eca4e03886f",
 						"exec": [
 							"pm.test(\"validar_status\", function(){",
 							"    pm.response.to.have.status(201);",
@@ -541,7 +544,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "56dcc3cc-a465-44fc-9e0a-4b923c307ee3",
+						"id": "a614fe79-06e7-4779-ab1d-fba6b90c711d",
 						"exec": [
 							"var localToken = pm.environment.get('token');",
 							"var localUuid = pm.environment.get('uuid');",
@@ -632,7 +635,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "57b2569d-b547-4bc2-a7d8-ae60f80d5978",
+						"id": "b7a8fcaa-e235-46fa-b2c4-c8afecfb51b0",
 						"exec": [
 							"var localToken = pm.environment.get('token');",
 							"var localUuid = pm.environment.get('uuid');",
@@ -650,7 +653,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "70adc2a3-bb7d-4e13-93af-be07332a55e3",
+						"id": "954a3f22-5ed2-4d9e-b1ae-f42a11459b74",
 						"exec": [
 							"pm.test(\"validar_status\", function(){",
 							"    pm.response.to.have.status(200);",
@@ -698,7 +701,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "0c85a1d1-3c4b-4c25-92b2-eda74929d9c3",
+						"id": "2e54bb10-ce09-4108-84fc-f0fb1b9db15b",
 						"exec": [
 							"pm.test(\"Validar_status_200\", function() { ",
 							"    pm.response.to.have.status(200) ",
